@@ -168,5 +168,9 @@ async function main() {
     if (erro.code !== 'FIM') throw erro;
   } finally { rl.close(); db.close(); }
 }
-if (require.main === module) main().catch(erro => { console.error(erro.message); process.exitCode = 1; });
 module.exports = { conectar, texto, codigo, cpfLimpo, dinheiro, dataValida, hoje, cadastrarPaciente, cadastrarMedico, agendar, mudarSituacao, realizar, registrarPagamento, baixarPagamento, totalRecebido, agenda, historico, pendencias, executar, main };
+
+if (require.main === module) {
+  if (process.argv.includes('--terminal')) main().catch(erro => { console.error(erro.message); process.exitCode = 1; });
+  else require('./server').iniciar();
+}

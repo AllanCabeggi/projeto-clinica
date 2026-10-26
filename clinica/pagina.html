@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clínica Simples</title>
+<style>
+body{font:14px Arial,sans-serif;margin:20px auto;padding:0 16px;max-width:1100px;color:#111;background:white}
+h1{font-size:24px}h2{font-size:20px}h3{font-size:16px}
+nav a{display:inline-block;margin:0 14px 8px 0}
+section{border-top:1px solid #ccc;margin-top:24px;padding-top:8px}
+label{display:inline-block;margin:6px 12px 6px 0;vertical-align:top}
+input,select,textarea,button{font:inherit;padding:5px;max-width:100%;box-sizing:border-box}
+label input,label select,label textarea{display:block;margin-top:4px}
+button{cursor:pointer;margin:4px 4px 4px 0}
+.tabela{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #bbb;padding:6px;text-align:left;vertical-align:top}th{background:#f3f3f3}
+.aviso{padding:10px;border:1px solid #999;background:#f5f5f5}.inline{display:inline}
+</style>
+</head>
+<body>
+<h1>Clínica Simples</h1>
+<nav><a href="#pacientes">Pacientes</a><a href="#medicos">Médicos</a><a href="#agenda">Agenda</a><a href="#consultas">Consultas</a><a href="#pagamentos">Pagamentos</a><a href="#relatorios">Relatórios</a></nav>
+<section id="pacientes"><h2>Pacientes</h2>{{avisoPacientes}}
+<form method="post" action="/pacientes">
+<label>Nome<input name="nome" required></label>
+<label>CPF<input name="cpf" inputmode="numeric" required></label>
+<label>Telefone<input name="telefone" type="tel" required></label>
+<button>Cadastrar paciente</button>
+</form>
+{{tabelaPacientes}}
+</section>
+<section id="medicos"><h2>Médicos</h2>{{avisoMedicos}}
+<form method="post" action="/medicos">
+<label>Nome<input name="nome" required></label>
+<label>CRM/UF<input name="crm" required></label>
+<button>Cadastrar médico</button>
+</form>
+{{tabelaMedicos}}
+</section>
+<section id="agenda"><h2>Agenda</h2>{{avisoAgenda}}
+<form method="post" action="/agendamentos">
+<label>Paciente<select name="paciente" required>{{pacientes}}</select></label>
+<label>Médico<select name="medico" required>{{medicos}}</select></label>
+<label>Data e horário<input name="quando" type="datetime-local" step="60" required></label>
+<button>Agendar</button>
+</form>
+{{tabelaAgenda}}
+</section>
+<section id="consultas"><h2>Consultas</h2>{{avisoConsultas}}
+<form method="post" action="/consultas">
+<label>Agendamento<select name="agendamento" required>{{agendamentos}}</select></label><br>
+<label>Queixa<textarea name="queixa" rows="2" cols="30" required></textarea></label>
+<label>Diagnóstico<textarea name="diagnostico" rows="2" cols="30" required></textarea></label>
+<label>Conduta<textarea name="conduta" rows="2" cols="30" required></textarea></label>
+<button>Registrar consulta</button>
+</form>
+<h3>Histórico do paciente</h3>
+<form method="get" action="/#consultas">
+<label>Paciente<select name="paciente" required>{{pacientesHistorico}}</select></label>
+<button>Consultar histórico</button>
+</form>
+{{tabelaHistorico}}
+</section>
+<section id="pagamentos"><h2>Pagamentos</h2>{{avisoPagamentos}}
+<form method="post" action="/pagamentos">
+<label>Consulta<select name="consulta" required>{{consultas}}</select></label>
+<label>Valor (R$)<input name="valor" inputmode="decimal" placeholder="150,00" required></label>
+<label>Data<input name="data" type="date" value="{{hoje}}" required></label>
+<label>Forma<select name="forma"><option>Dinheiro</option><option>Crédito</option><option>Débito</option><option>PIX</option></select></label>
+<label>Situação<select name="situacao"><option>Pendente</option><option>Pago</option></select></label>
+<button>Registrar pagamento</button>
+</form>
+{{tabelaPagamentos}}
+</section>
+<section id="relatorios"><h2>Relatórios</h2>
+<h3>Total recebido por período</h3>
+<form method="get" action="/#relatorios">
+<label>De<input type="date" name="inicio" value="{{inicio}}" required></label>
+<label>Até<input type="date" name="fim" value="{{fim}}" required></label>
+<button>Consultar total</button>
+</form>
+<p><strong>Total recebido: {{total}}</strong></p>
+<h3>Pagamentos pendentes</h3>
+{{tabelaPendencias}}
+<h3>Pacientes que faltaram</h3>
+{{tabelaFaltas}}
+</section>
+</body></html>

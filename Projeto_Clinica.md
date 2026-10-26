@@ -6,7 +6,7 @@ Allan Vinicius Cabeggi Alvarenga — RGM: 45663742
 
 Júlio César Benicio Inácio — RGM: 42693047
 
-A Clínica Simples reúne o cadastro de pacientes e médicos, a agenda de atendimentos, as consultas e os pagamentos. O programa funciona no terminal, com JavaScript, Node.js e SQLite.
+A Clínica Simples reúne o cadastro de pacientes e médicos, a agenda de atendimentos, as consultas e os pagamentos. O acesso ocorre por uma página local no navegador, usando JavaScript, Node.js e SQLite.
 
 ## 1 Método ágil Scrum
 
@@ -28,7 +28,7 @@ O projeto conta com um único squad, o Squad Clínica. Como a equipe tem dois in
 
 | Scrum Master | Júlio César Benicio Inácio | Acompanhar as sprints e ajudar a resolver impedimentos. |
 
-| Desenvolvimento | Allan Vinicius Cabeggi Alvarenga | Implementar o menu e as funções do programa. |
+| Desenvolvimento | Allan Vinicius Cabeggi Alvarenga | Implementar os formulários e as funções do programa. |
 
 | Banco de dados | Júlio César Benicio Inácio | Organizar as tabelas, os relacionamentos e as consultas SQL. |
 
@@ -90,13 +90,13 @@ O sistema se limita aos cadastros, à agenda, às consultas e aos pagamentos. O 
 
 | RNF02 | Armazenamento | Salvar os dados em um banco SQLite local e mantê-los após fechar o programa. |
 
-| RNF03 | Interface | Usar um menu numerado no terminal, com mensagens de confirmação e de erro. |
+| RNF03 | Interface | Usar uma página local no navegador, com formulários, tabelas, botões e mensagens de confirmação e de erro. |
 
 | RNF04 | Integridade | Usar parâmetros nas consultas SQL, chaves estrangeiras e restrições para evitar registros duplicados ou sem vínculo. |
 
 | RNF05 | Valores monetários | Armazenar os valores em centavos inteiros e recusar entradas fora do limite de inteiros seguros do JavaScript. |
 
-| RNF06 | Organização | Concentrar as funções em main.js e a estrutura do banco em schema.sql. O package.json define o comando de execução. |
+| RNF06 | Organização | Separar interface (pagina.html e pagina.js), servidor (server.js), funções (main.js) e estrutura do banco (schema.sql). |
 
 | RNF07 | Funcionamento local | Permitir o uso do programa sem conexão com a internet. |
 
@@ -116,7 +116,7 @@ O sistema se limita aos cadastros, à agenda, às consultas e aos pagamentos. O 
 
 | RN04 | Um médico não pode ter dois agendamentos no mesmo instante. Um cancelamento libera o horário. O controle compara horários de início, sem calcular a duração. |
 
-| RN05 | As situações da agenda são Agendado, Confirmado, Realizado, Cancelado e Não compareceu. Agendamentos encerrados não são reabertos pelo menu. |
+| RN05 | As situações da agenda são Agendado, Confirmado, Realizado, Cancelado e Não compareceu. Agendamentos encerrados não podem ser reabertos. |
 
 | RN06 | Somente agendamentos Agendados ou Confirmados podem gerar consulta. Cancelamentos, faltas e atendimentos já realizados impedem novo registro. |
 
@@ -180,7 +180,7 @@ O backlog reúne as tarefas de cada sprint. As prioridades indicam a ordem de de
 
 ## 5 Diagrama de casos de uso
 
-A recepcionista cuida dos cadastros e da agenda. O médico registra as consultas e acompanha o histórico. O responsável financeiro registra os pagamentos e consulta os valores recebidos ou pendentes. Essas atividades usam o mesmo menu, sem login por perfil.
+A recepcionista cuida dos cadastros e da agenda. O médico registra as consultas e acompanha o histórico. O responsável financeiro registra os pagamentos e consulta os valores recebidos ou pendentes. Essas atividades usam a mesma página local, sem login por perfil.
 
 ![Diagrama de casos de uso](diagrama_casos_uso.svg)
 

@@ -7,6 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "start": "node main.js"
+    "start": "node server.js",
+    "dados": "node dados_sinteticos.js"
   }
 }
