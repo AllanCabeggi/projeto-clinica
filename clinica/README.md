@@ -1,13 +1,13 @@
-# Clínica Simples em JavaScript
+# Clínica Simples
 
-Abra esta pasta no VS Code. Requer Node.js 22.13 ou superior.
+Aplicação em JavaScript com Node.js e SQLite. O menu permite cadastrar pacientes e médicos, organizar a agenda, registrar consultas, consultar históricos e acompanhar pagamentos.
 
-```sh
-node main.js
-```
+Dentro desta pasta, a execução utiliza:
 
-Ou execute `npm start`. Para testar: `npm test`. Não precisa de `npm install`.
+~~~sh
+npm start
+~~~
 
-O banco SQLite `clinica.db` é criado automaticamente aqui. Não apague esse arquivo se quiser manter seus dados.
+Também pode ser utilizado node main.js. É necessário Node.js 22.13 ou superior, sem instalação de pacotes externos.
 
-Menu no terminal com cadastro de pacientes e médicos, agenda, consultas, histórico e pagamentos. Os 15 requisitos e as sprints estão na documentação que acompanha o projeto.
+O banco clinica.db é criado na primeira execução e permanece salvo ao fechar o programa. A documentação e os diagramas estão na pasta principal.

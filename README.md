@@ -1,46 +1,25 @@
-﻿# Clínica Simples
+# Clínica Simples
 
-Projeto acadêmico de Análise e Projeto de Sistemas feito em JavaScript com Node.js e SQLite. O escopo reúne 15 requisitos do enunciado original.
+Sistema de cadastro de pacientes e médicos, agendamentos, consultas e pagamentos. Desenvolvido em JavaScript com Node.js e SQLite, com menu no terminal.
 
-## Executar
+## Integrantes
 
-Requer Node.js 22.13 ou superior. No terminal do VS Code:
+- Allan Vinicius Cabeggi Alvarenga — RGM: 45663742
+- Júlio César Benicio Inácio — RGM: 42693047
 
-```sh
+## Execução
+
+É necessário Node.js 22.13 ou superior. Na pasta do projeto:
+
+~~~sh
 cd clinica
 npm start
-```
+~~~
 
-Também é possível executar `node main.js`. Não é necessário rodar `npm install`: o programa utiliza apenas módulos nativos do Node.js.
+O comando node main.js também inicia o programa dentro da pasta clinica. Não é necessário instalar pacotes externos. O banco clinica.db é criado automaticamente e mantém os dados após o encerramento.
 
-## Testar
+## Documentação
 
-Dentro da pasta `clinica`:
+Projeto_Clinica.pdf contém Scrum, papéis da equipe, requisitos, regras de negócio, sprints, backlog e os diagramas de casos de uso e de classes. O conteúdo também está disponível em Projeto_Clinica.md e Projeto_Clinica.html.
 
-```sh
-npm test
-```
-
-A suíte contém 10 testes, cobrindo regras, menu e persistência dos dados.
-
-## Funcionalidades
-
-- Cadastro de pacientes com CPF único e cadastro de médicos.
-- Agendamento, confirmação, cancelamento e registro de faltas.
-- Registro de consultas e histórico por paciente.
-- Registro de pagamentos, baixa, pendências e total recebido por período.
-
-## Organização
-
-- `clinica/main.js`: programa e regras.
-- `clinica/schema.sql`: tabelas e gatilhos SQLite.
-- `clinica/test_main.js`: testes automatizados.
-- `Projeto_Clinica.md`: documentação editável com requisitos, backlog, sprints, casos de uso e diagramas.
-- `Projeto_Clinica.pdf`: documentação para leitura.
-- `LEIA-ME.txt`: instruções detalhadas e roteiro de demonstração.
-
-O banco `clinica/clinica.db` é criado automaticamente na primeira execução e fica salvo localmente. Os bancos não são enviados ao repositório.
-
-## Escopo acadêmico
-
-Menu no terminal, sem login ou interface gráfica. Usar dados fictícios na demonstração. As datas das sprints são propostas de planejamento e os nomes e RGMs devem ser preenchidos pelo grupo.
+Os diagramas estão em diagrama_casos_uso.svg e diagrama_classes.svg.

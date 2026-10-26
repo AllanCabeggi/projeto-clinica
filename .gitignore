@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 *.db
 *.db-*
 *.sqlite
@@ -9,5 +9,3 @@
 *.log
 .DS_Store
 Thumbs.db
-# Documento antigo da versão Python; documentação atual em MD, HTML e PDF.
-/Projeto_Clinica.docx
