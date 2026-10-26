@@ -1,0 +1,13 @@
+{
+  "name": "clinica-simples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projeto acadêmico de clínica com 15 requisitos",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "test": "node --test test_main.js"
+  }
+}

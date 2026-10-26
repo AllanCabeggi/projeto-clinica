@@ -1,0 +1,10 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS paciente(id INTEGER PRIMARY KEY,nome TEXT NOT NULL,cpf TEXT NOT NULL UNIQUE,telefone TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS medico(id INTEGER PRIMARY KEY,nome TEXT NOT NULL,crm TEXT NOT NULL UNIQUE);
+CREATE TABLE IF NOT EXISTS agendamento(id INTEGER PRIMARY KEY,paciente_id INTEGER NOT NULL REFERENCES paciente(id),medico_id INTEGER NOT NULL REFERENCES medico(id),data_hora TEXT NOT NULL,situacao TEXT NOT NULL DEFAULT 'Agendado' CHECK(situacao IN ('Agendado','Confirmado','Realizado','Cancelado','Não compareceu')));
+CREATE UNIQUE INDEX IF NOT EXISTS horario_medico ON agendamento(medico_id,data_hora) WHERE situacao <> 'Cancelado';
+CREATE TABLE IF NOT EXISTS consulta(id INTEGER PRIMARY KEY,agendamento_id INTEGER NOT NULL UNIQUE REFERENCES agendamento(id),queixa TEXT NOT NULL,diagnostico TEXT NOT NULL,conduta TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS pagamento(id INTEGER PRIMARY KEY,consulta_id INTEGER NOT NULL REFERENCES consulta(id),valor_centavos INTEGER NOT NULL CHECK(valor_centavos>0),data TEXT NOT NULL,forma TEXT NOT NULL CHECK(forma IN ('Dinheiro','Crédito','Débito','PIX')),situacao TEXT NOT NULL CHECK(situacao IN ('Pendente','Pago')));
+CREATE TRIGGER IF NOT EXISTS validar_consulta BEFORE INSERT ON consulta WHEN (SELECT situacao FROM agendamento WHERE id=NEW.agendamento_id) NOT IN ('Agendado','Confirmado') BEGIN SELECT RAISE(ABORT,'Agendamento não pode gerar consulta.'); END;
+CREATE TRIGGER IF NOT EXISTS marcar_realizado AFTER INSERT ON consulta BEGIN UPDATE agendamento SET situacao='Realizado' WHERE id=NEW.agendamento_id; END;
+CREATE TRIGGER IF NOT EXISTS proteger_realizado BEFORE UPDATE OF situacao ON agendamento WHEN EXISTS(SELECT 1 FROM consulta WHERE agendamento_id=OLD.id) AND NEW.situacao<>'Realizado' BEGIN SELECT RAISE(ABORT,'Consulta já realizada.'); END;
